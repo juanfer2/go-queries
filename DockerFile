@@ -12,7 +12,7 @@ WORKDIR /build
 
 # Copy and download dependency using go mod
 COPY go.mod .
-#COPY go.sum .
+COPY go.sum .
 RUN go mod download
 
 # Copy the code into the container
@@ -20,7 +20,7 @@ COPY . .
 
 # Build the application
 #RUN go build -o dist/main .
-RUN go build
+RUN go build -o dist/main
 
 # Move to /dist directory as the place for resulting binary folder
 #WORKDIR /dist
@@ -33,4 +33,4 @@ EXPOSE 4000
 
 CMD ["ls"]
 # Command to run when starting the container
-CMD ["main"]
+CMD ["/dist/main"]
